@@ -85,7 +85,7 @@ calcula_tempo
 
    # Conforme a tecla digitada, direciona para a função específica
    case "$TECLA" in
-	f) finalizar ;;
+	f) Finalizar ;;
 	p) pausar ;;
 	[[:alnum:]]) sleep 1 && continue ;; # Qualquer tecla exceto f e p,
    # aguarda 1 segundo e continua
@@ -101,7 +101,7 @@ paplay ./3.ogg
 #musica de fundo 10s
 paplay ./0.ogg
 clear
-   echo -e "\033[40;33;1m" "> Pomodoro" "'$nomePomodoro' "finalizado":$HORASF:$MINUTOSF:$SEGUNDOSF \033[m"
+ echo -e "\033" "> Pomodoro" "'$nomePomodoro' "finalizado":$HORASF:$MINUTOSF:$SEGUNDOSF \033"
 exit 0
 }
 
