@@ -21,4 +21,4 @@ EXEMPLOS DE USO:
    $./pomodoro -r 01:00:00........contagem regressiva de 1 hora
 ```
 
-ex: ```shell pomodoro -p 00:00:10```
+ex: ```pomodoro -p 00:00:10```
