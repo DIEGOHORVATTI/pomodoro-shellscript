@@ -1,20 +1,7 @@
 #!/bin/bash
-# crono.sh
-#
-# Cronometro em shell
-#
-# Versão 1.0: Marcação do tempo de forma progressiva
-# Versão 1.1: Adicionado opção para tempo regressivo
-# Versão 1.2: Adicionado opção para tempo limite na contagem progressiva
-# Versão 1.3: Adicionado opção para pausa do tempo
-# Versão 1.4: Adicionado efeitos na forma como o tempo é exibido na tela
-#
-# Joanes Duarte, Janeiro 2013
-#
-
-###############################[ FUNÇÕES ]#################################
 
 ### Função para mostras as opções de uso do programa
+
 opcoes_de_uso(){
 echo "Uso: $(basename "$0") [OPÇÔES]
 
@@ -33,11 +20,13 @@ OPÇÕES
   -V, --version		Mostra a versão do programa e sai
 
 EXEMPLOS DE USO: 
-   $./crono -p.................contagem progessiva infinita
-   $./crono -p 01:00:00........contagem progressiva de 1 hora
-   $./crono -r 01:00:00........contagem regressiva de 1 hora
+   $./pomodoro -p.................contagem progessiva infinita
+   $./pomodoro -p 01:00:00........contagem progressiva de 1 hora
+   $./pomodoro -r 01:00:00........contagem regressiva de 1 hora
 " && exit 1
 }
+
+read -p 'Nome: ' nomePomodoro
 
 ### Função que faz a conversão do tempo de segundos para o formato hh:mm:ss
 calcula_tempo(){
@@ -86,12 +75,10 @@ TEMPO_FINAL=$(($TEMPO_FINAL - 1))
 calcula_tempo
 
 # Feito os calculos, imprime na tela
-   echo""
    echo -e "\033[40;37;1m.........................\033[m"
-   echo -e "\033[40;37;1m|    START: $HORASF:$MINUTOSF:$SEGUNDOSF    |\033[m"
+   echo -e "\033[40;37;1m| Start Pomodoro: $HORASF:$MINUTOSF:$SEGUNDOSF|\n| > $nomePomodoro \033[m"
    echo -e "\033[40;37;1m.........................\033[m"
-   echo -e "\033[40;37;1m|\033[m\033[40;37m [f]inalizar  \
-[p]ausar \033[m\033[40;37;1m|\033[m"
+   echo -e "\033[40;37;1m|\033[m\033[40;37m [f]inalizar  \[p]ausar \033[m\033[40;37;1m|\033[m"
    echo -e "\033[40;37;1m.........................\033[m"
 read -n1 -t 1 TECLA  # Aguarda 1 segundo pela tecla, se não, continua
 
@@ -100,18 +87,17 @@ read -n1 -t 1 TECLA  # Aguarda 1 segundo pela tecla, se não, continua
 	f) finalizar ;;
 	p) pausar ;;
 	[[:alnum:]]) sleep 1 && continue ;; # Qualquer tecla exceto f e p,
-					    # aguarda 1 segundo e continua
+   # aguarda 1 segundo e continua
   esac
 done
-finalizar
+Finalizar Pomodoro
 }
 
 ### Função que mostra a tela final depois de encerrado o script
 finalizar(){
 clear
    paplay /home/div/programas/0.ogg
-   echo -e "\033[40;33;1m    FINISH: $HORASF:$MINUTOSF:\
-$SEGUNDOSF    \033[m"
+   echo -e "\033[40;33;1m " "> Pomodoro" "$nomePomodoro "finalizado":$HORASF:$MINUTOSF:\$SEGUNDOSF \033[m"
 exit 0
 }
 
@@ -123,7 +109,7 @@ while [ "$TECLA" != 'c' ] ; do
 clear
 
    echo -e "\033[40;37;1m.........................\033[m"
-   echo -e "\033[40;37;1m|    PAUSE: $HORASF:$MINUTOSF:$SEGUNDOSF    |\033[m"
+   echo -e "\033[40;37;1m| Pomodoro Pausado: $HORASF:$MINUTOSF:$SEGUNDOSF|\n| > $nomePomodoro \033[m"
    echo -e "\033[40;37;1m.........................\033[m"
    echo -e "\033[40;37;1m|\033[m\033[40;37m[c]ontinuar \
 [f]inalizar\033[m\033[40;37;1m|\033[m"
