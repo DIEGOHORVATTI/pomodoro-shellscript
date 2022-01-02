@@ -148,7 +148,6 @@ conta_tempo
 
 # Testa se foi passado parâmetro '$1'
 [ "$1" ] || { opcoes_de_uso ; } 
-[ "$1" ] || { opcoes_de_uso ; } 
 
 # Passado parâmetro '$1', faz o tratamento do mesmo
 while test -n "$1"
