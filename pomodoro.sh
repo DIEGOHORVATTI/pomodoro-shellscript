@@ -1,7 +1,6 @@
 #!/bin/bash
 
 ### Função para mostras as opções de uso do programa
-
 opcoes_de_uso(){
 echo "Uso: $(basename "$0") [OPÇÔES]
 
@@ -26,7 +25,7 @@ EXEMPLOS DE USO:
 " && exit 1
 }
 
-read -p 'Nome: ' nomePomodoro
+read -p 'Nome : ' nomePomodoro
 
 ### Função que faz a conversão do tempo de segundos para o formato hh:mm:ss
 calcula_tempo(){
@@ -75,12 +74,12 @@ TEMPO_FINAL=$(($TEMPO_FINAL - 1))
 calcula_tempo
 
 # Feito os calculos, imprime na tela
-   echo -e "\033[40;37;1m.........................\033[m"
-   echo -e "\033[40;37;1m| Start Pomodoro: $HORASF:$MINUTOSF:$SEGUNDOSF|\n| > $nomePomodoro \033[m"
-   echo -e "\033[40;37;1m.........................\033[m"
-   echo -e "\033[40;37;1m|\033[m\033[40;37m [f]inalizar  \[p]ausar \033[m\033[40;37;1m|\033[m"
-   echo -e "\033[40;37;1m.........................\033[m"
-read -n1 -t 1 TECLA  # Aguarda 1 segundo pela tecla, se não, continua
+   echo -e "\033[0;32m...........................\n\033]"
+   echo -e "\033[0;32m| Start Pomodoro: $HORASF:$MINUTOSF:$SEGUNDOSF|\n| > $nomePomodoro \n\033]"
+   echo -e "\033[0;32m...........................\n\033]"
+   echo -e "\033[0;32m| [f]inalizar    [p]ausar |\n\033]"
+   echo -e "\033[0;32m...........................\033]"
+   read -n1 -t 1 TECLA  # Aguarda 1 segundo pela tecla, se não, continua
 
    # Conforme a tecla digitada, direciona para a função específica
    case "$TECLA" in
@@ -90,7 +89,7 @@ read -n1 -t 1 TECLA  # Aguarda 1 segundo pela tecla, se não, continua
    # aguarda 1 segundo e continua
   esac
 done
-Finalizar Pomodoro
+Finalizar
 }
 
 ### Função que mostra a tela final depois de encerrado o script
@@ -108,12 +107,13 @@ pausar(){
 while [ "$TECLA" != 'c' ] ; do
 clear
 
-   echo -e "\033[40;37;1m.........................\033[m"
-   echo -e "\033[40;37;1m| Pomodoro Pausado: $HORASF:$MINUTOSF:$SEGUNDOSF|\n| > $nomePomodoro \033[m"
-   echo -e "\033[40;37;1m.........................\033[m"
-   echo -e "\033[40;37;1m|\033[m\033[40;37m[c]ontinuar \
-[f]inalizar\033[m\033[40;37;1m|\033[m"
-   echo -e "\033[40;37;1m.........................\033[m"
+   echo -e "\033[0;32m.............................\n\033]"
+   echo -e "\033[0;32m| Pomodoro Pausado: $HORASF:$MINUTOSF:$SEGUNDOSF|\n| > $nomePomodoro \n\033]"
+   echo -e "\033[0;32m.............................\n\033]"
+   echo -e "\033[0;32m| [c]ontinuar   [f]inalizar |\n\033]"
+   echo -e "\033[0;32m.............................\033]"
+   #echo -e "\033[40;37;1m|\033[m\033[40;37m[c]ontinuar \\033[m\033[40;37;1m|\033[m"
+   
 read -n1 -t 1 TECLA
    case "$TECLA" in
 	f) finalizar ;;
