@@ -2,7 +2,7 @@
 Um simples script de gerenciamento de tempo em .sh
 
 ```shell
--p, --progressive	Inicia o cronometro em ordem progressiva
+ -p, --progressive	Inicia o cronometro em ordem progressiva
 			Obs.:Para limitar o tempo na contagem progressiva,
 			é necessário informar o tempo final no formato
 			hh:mm:ss.
