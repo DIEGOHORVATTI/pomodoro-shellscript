@@ -16,7 +16,7 @@ OPÇÕES
 
   -h, --help		Mostra esta tela de ajuda e sai
 
-  -V, --version		Mostra a versão do programa e sai
+  -v, --version		Mostra a versão do programa e sai
 
 EXEMPLOS DE USO: 
    $./pomodoro -p.................contagem progessiva infinita
@@ -24,8 +24,6 @@ EXEMPLOS DE USO:
    $./pomodoro -r 01:00:00........contagem regressiva de 1 hora
 " && exit 1
 }
-
-read -p 'Nome : ' nomePomodoro
 
 ### Função que faz a conversão do tempo de segundos para o formato hh:mm:ss
 calcula_tempo(){
@@ -56,6 +54,10 @@ SEGUNDOSF=$(printf '%.2d' $SEGUNDOS)
 
 ### Função principal que atualiza o tempo na tela automaticamente
 conta_tempo(){
+
+#nome do pomodoro
+read -p 'Nome: ' nomePomodoro
+
 clear
 
 # Se o operador não for negativo, define variável $TEMPO como -1
@@ -93,10 +95,10 @@ Finalizar
 }
 
 ### Função que mostra a tela final depois de encerrado o script
-finalizar(){
+Finalizar(){
+paplay /home/div/programas/0.ogg
 clear
-   paplay /home/div/programas/0.ogg  #musica de final
-   echo -e "\033[40;33;1m " "> Pomodoro" "$nomePomodoro "finalizado":$HORASF:$MINUTOSF:\$SEGUNDOSF \033[m"
+   echo -e "\033[40;33;1m" "> Pomodoro" "'$nomePomodoro' "finalizado":$HORASF:$MINUTOSF:$SEGUNDOSF \033[m"
 exit 0
 }
 
@@ -112,7 +114,6 @@ clear
    echo -e "\033[0;32m.............................\n\033]"
    echo -e "\033[0;32m| [c]ontinuar   [f]inalizar |\n\033]"
    echo -e "\033[0;32m.............................\033]"
-   #echo -e "\033[40;37;1m|\033[m\033[40;37m[c]ontinuar \\033[m\033[40;37;1m|\033[m"
    
 read -n1 -t 1 TECLA
    case "$TECLA" in
@@ -123,11 +124,8 @@ done
 
 ### Função que mostra a versão atual do programa
 versao() {
-e
-cho -n $(basename "$0")
-# Extrai versão diretamente do cabeçalho do programa
-grep '^# Versão ' "$0" | tail -1 | cut -d : -f 1 | tr -d \#
-exit 0
+echo "v 1.0"
+exit
 }
 
 ### Função que testa e converte o parâmetro '$2' para segundos
@@ -150,6 +148,7 @@ conta_tempo
 
 # Testa se foi passado parâmetro '$1'
 [ "$1" ] || { opcoes_de_uso ; } 
+[ "$1" ] || { opcoes_de_uso ; } 
 
 # Passado parâmetro '$1', faz o tratamento do mesmo
 while test -n "$1"
@@ -157,24 +156,26 @@ do
 
    case "$1" in
 
-        -p | --progressive) 
+   -p | --progressive) 
 	OP=+ ; TEMPO=-1
 	# Se tiver parâmetro 2, chama a funçao para teste do mesmo, caso não
 	# tenha, define as variáveis e chama direto a função conta_tempo
-	[ "$2" ] || { TEMPO_FINAL=999999 ; conta_tempo ; }
-	TEMPO_LIMITE=$2 && teste_par2
-	;;
+	[ "$2" ] || { 
+      TEMPO_FINAL=999999 ; conta_tempo ; 
+   } 
+   TEMPO_LIMITE=$2 && teste_par2;;
 
 	-r | --regressive)
 	# Testa se foi passado o parâmetro $2, que neste caso é obrigatório
-	[ "$2" ] || { echo "Necessário informar o tempo inicial para \
-início da contagem regressiva" ; exit 1 ; }
-	TEMPO_LIMITE=$2 ; OP=- && teste_par2
-	;;
+	[ "$2" ] || {
+      echo "Necessário informar o tempo inicial para \ início da contagem regressiva" 
+      exit 1 
+      }
+      TEMPO_LIMITE=$2 ; OP=- && teste_par2;;
 
 	-h | --help) opcoes_de_uso ;;
-	-V | --version) versao ;;
-        *) opcoes_de_uso ;;
+	-v | --version) versao ;;
+   *) opcoes_de_uso ;;
 
    esac
 
