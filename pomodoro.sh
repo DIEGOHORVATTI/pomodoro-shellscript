@@ -95,7 +95,7 @@ Finalizar
 ### Função que mostra a tela final depois de encerrado o script
 finalizar(){
 clear
-   paplay /home/div/programas/0.ogg
+   paplay /home/div/programas/0.ogg  #musica de final
    echo -e "\033[40;33;1m " "> Pomodoro" "$nomePomodoro "finalizado":$HORASF:$MINUTOSF:\$SEGUNDOSF \033[m"
 exit 0
 }
