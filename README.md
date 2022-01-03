@@ -20,5 +20,3 @@ EXEMPLOS DE USO:
    $./pomodoro -p 01:00:00........contagem progressiva de 1 hora
    $./pomodoro -r 01:00:00........contagem regressiva de 1 hora
 ```
-
-ex: ```pomodoro -p 00:00:10```
